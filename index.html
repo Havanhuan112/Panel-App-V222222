@@ -8,52 +8,39 @@
 </head>
 <body>
 
-    <!-- Logo -->
-    <div class="logo" onclick="toggleMenu()"></div>
+      <div class="mod-menu">
+        <div class="mod-title">App Panel</div>
 
-    <!-- Mod Menu -->
-    <div class="mod-menu" id="modMenu">
-        <div class="mod-title">FFH4x Version 3.0</div>
-        
-        <div class="checkbox-container" onclick="toggleCheckbox(this)">
-            <i class="fa-solid fa-crosshairs icon"></i>
-            <div class="checkbox"><i class="fa-solid fa-check"></i></div>
-            <label>Nhẹ tâm</label>
+        <div class="checkbox-container" onclick="toggleCheckbox(1)">
+            <label>Chức năng 1</label>
+            <i class="fa-regular fa-square checkbox-icon" id="icon1"></i>
         </div>
 
-        <div class="checkbox-container" onclick="toggleCheckbox(this)">
-           <i class="fa-solid fa-crosshairs icon"></i>
-            <div class="checkbox"><i class="fa-solid fa-check"></i></div>
-            <label>Đạn thẳng</label>
+        <div class="checkbox-container" onclick="toggleCheckbox(2)">
+            <label>Chức năng 2</label>
+            <i class="fa-regular fa-square checkbox-icon" id="icon2"></i>
         </div>
 
-        <div class="checkbox-container" onclick="toggleCheckbox(this)">
-           <i class="fa-solid fa-crosshairs icon"></i>
-            <div class="checkbox"><i class="fa-solid fa-check"></i></div>
-            <label>Ghim cổ</label>
+        <div class="checkbox-container" onclick="toggleCheckbox(3)">
+            <label>Chức năng 3</label>
+            <i class="fa-regular fa-square checkbox-icon" id="icon3"></i>
         </div>
 
-        <div class="checkbox-container" onclick="toggleCheckbox(this)">
-            <i class="fa-solid fa-crosshairs icon"></i>
-            <div class="checkbox"><i class="fa-solid fa-check"></i></div>
-            <label>Giảm Lố</label>
+        <div class="checkbox-container" onclick="toggleCheckbox(4)">
+            <label>Chức năng 4</label>
+            <i class="fa-regular fa-square checkbox-icon" id="icon4"></i>
         </div>
 
-        <div class="checkbox-container" onclick="toggleCheckbox(this)">
-           <i class="fa-solid fa-crosshairs icon"></i>
-            <div class="checkbox"><i class="fa-solid fa-check"></i></div>
-            <label>Nhạy Tâm</label>
-        </div>
-
-        <div class="checkbox-container" onclick="toggleCheckbox(this)">
-            <i class="fa-solid fa-crosshairs icon"></i>
-            <div class="checkbox"><i class="fa-solid fa-check"></i></div>
-            <label>Aim 50%</label>
+        <div class="checkbox-container" onclick="toggleCheckbox(5)">
+            <label>Chức năng 5</label>
+            <i class="fa-regular fa-square checkbox-icon" id="icon5"></i>
         </div>
     </div>
 
-    <!-- Thông báo -->
-    <div id="notification" class="notification"></div>
+    <div class="notification" id="notification">
+        <i class="fa-solid notif-icon" id="notifIcon"></i>
+        <span id="notifText"></span>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
