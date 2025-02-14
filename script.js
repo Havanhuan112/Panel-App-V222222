@@ -1,107 +1,61 @@
-particlesJS('particles-js', {
-            particles: {
-                number: { value: 100, density: { enable: true, value_area: 800 } },
-                color: { value: '#ff0000' },
-                shape: {
-                    type: 'circle',
-                    stroke: { width: 0, color: '#ff0000' },
-                    polygon: { nb_sides: 5 }
-                },
-                opacity: {
-                    value: 0.5,
-                    random: true,
-                    anim: { enable: true, speed: 1, opacity_min: 0, sync: false }
-                },
-                size: {
-                    value: 5,
-                    random: true,
-                    anim: { enable: false }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#ff0000',
-                    opacity: 0.4,
-                    width: 2
-                },
-                move: {
-                    enable: true,
-                    speed: 6,
-                    direction: 'none',
-                    random: false,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false,
-                    attract: { enable: false }
-                }
+function toggleMenu() {
+            var menu = document.getElementById("modMenu");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        }
+
+        function toggleCheckbox(element) {
+            var notification = document.getElementById("notification");
+
+            // Hiện thông báo xử lý
+            notification.innerHTML = '<i class="fa-solid fa-spinner loading-icon"></i> Đang xử lý...';
+            notification.style.background = "rgba(255, 165, 0, 0.9)"; // Màu cam
+            notification.style.display = "block";
+
+            setTimeout(function () {
+                // Hoàn thành xử lý, đổi icon thành tích xanh
+                notification.innerHTML = '<i class="fa-solid fa-circle-check checkmark"></i> Thành công!';
+                notification.style.background = "rgba(0, 255, 0, 0.9)"; // Màu xanh lá
+                element.classList.toggle("active");
+
+                // Ẩn thông báo sau 3s
+                setTimeout(() => { notification.style.display = "none"; }, 2000);
+            }, 2000);
+        }
+// JavaScript để kéo menu với tính năng đầy đủ
+        const menu = document.getElementById("modMenu");
+        let isDragging = false;
+        let offsetX, offsetY;
+// Xử lý hiển thị và ẩn marquee sau 5 giây
+        setTimeout(() => {
+            marquee.style.display = "none";
+        }, 20000);
+        menu.addEventListener('pointerdown', (e) => {
+            // Bắt đầu kéo khi chuột nhấn vào
+            isDragging = true;
+            offsetX = e.clientX - menu.getBoundingClientRect().left;
+            offsetY = e.clientY - menu.getBoundingClientRect().top;
+            menu.style.cursor = "grabbing";
+            e.preventDefault(); // Ngừng sự kiện mặc định
+        });
+
+        document.addEventListener('pointermove', (e) => {
+            // Di chuyển menu khi chuột di chuyển
+            if (isDragging) {
+                const x = e.clientX - offsetX;
+                const y = e.clientY - offsetY;
+                const maxX = window.innerWidth - menu.offsetWidth;
+                const maxY = window.innerHeight - menu.offsetHeight;
+
+                // Giới hạn di chuyển menu trong cửa sổ trình duyệt
+                menu.style.left = Math.min(Math.max(x, 0), maxX) + 'px';
+                menu.style.top = Math.min(Math.max(y, 0), maxY) + 'px';
             }
         });
 
-function updateTime() {
-            const currentTimeElement = document.getElementById('current-time');
-            const now = new Date();
-            const formattedTime = now.toLocaleTimeString();
-            currentTimeElement.textContent = 'Thời gian: ' + formattedTime;
-        }
-
-        
-        setInterval(updateTime, 1000);
-        updateTime();
-
-        
-        function beep() {
-            var audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            var oscillator = audioContext.createOscillator();
-            oscillator.type = 'sine';  
-            oscillator.frequency.setValueAtTime(200, audioContext.currentTime); 
-            oscillator.connect(audioContext.destination);
-            oscillator.start();
-            oscillator.stop(audioContext.currentTime + 0.6);  
-        }
-
-        
-        const checkboxes = document.querySelectorAll('.checkbox-item input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('click', () => {
-                beep(); 
-                const loadingElement = document.getElementById('loading');
-                loadingElement.style.display = 'block';
-
-                
-                setTimeout(() => {
-                    loadingElement.style.display = 'none';
-                }, 5000);
-            });
+        document.addEventListener('pointerup', () => {
+            // Dừng kéo khi thả chuột
+            if (isDragging) {
+                isDragging = false;
+                menu.style.cursor = "grab";
+            }
         });
-
-        
-        function showNotification() {
-            document.getElementById('notification').style.display = 'block';
-        }
-
-        
-        function closeNotification() {
-            document.getElementById('notification').style.display = 'none';
-        }
-
-        
-        function showSuccessNotification() {
-            const notification = document.createElement('div');
-            notification.classList.add('notification');
-            notification.innerHTML = `
-                <div class="intro-text">Chức năng đã được chọn thành công!</div>
-                <button class="close-btn" onclick="closeSuccessNotification(this)">X</button>
-            `;
-            document.body.appendChild(notification);
-
-            
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 3000); 
-        }
-
-        
-        function closeSuccessNotification(button) {
-            const notification = button.parentElement;
-            notification.style.display = 'none';
-        }
