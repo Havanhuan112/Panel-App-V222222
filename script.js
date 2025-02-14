@@ -1,41 +1,23 @@
-function toggleCheckbox(num) {
-            let icon = document.getElementById(`icon${num}`);
-            let isChecked = icon.classList.contains("fa-check-square");
-            
-            if (!isChecked) {
-                showNotification("loading", "Đang xử lý...");
-
-                icon.classList.remove("fa-square", "fa-check-square");
-                icon.classList.add("fa-spinner", "fa-spin");
-
-                setTimeout(() => {
-                    icon.classList.remove("fa-spinner", "fa-spin");
-                    icon.classList.add("fa-check-square");
-                    showNotification("success", "Thành công!");
-                }, 3000);
-            } else {
-                icon.classList.remove("fa-check-square");
-                icon.classList.add("fa-square");
-            }
+function toggleMenu() {
+            var menu = document.getElementById("modMenu");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
         }
 
-        function showNotification(type, text) {
-            let notification = document.getElementById("notification");
-            let notifIcon = document.getElementById("notifIcon");
-            let notifText = document.getElementById("notifText");
+        function toggleCheckbox(element) {
+            var notification = document.getElementById("notification");
 
-            if (type === "loading") {
-                notifIcon.className = "fa-solid fa-spinner fa-spin notif-icon";
-                notification.style.background = "#444";
-            } else if (type === "success") {
-                notifIcon.className = "fa-solid fa-check-circle notif-icon";
-                notification.style.background = "#28a745";
-            }
+            // Hiện thông báo xử lý
+            notification.innerHTML = '<i class="fa-solid fa-spinner loading-icon"></i> Đang xử lý...';
+            notification.style.background = "rgba(255, 165, 0, 0.9)"; // Màu cam
+            notification.style.display = "block";
 
-            notifText.innerText = text;
-            notification.classList.add("show");
+            setTimeout(function () {
+                // Hoàn thành xử lý, đổi icon thành tích xanh
+                notification.innerHTML = '<i class="fa-solid fa-circle-check checkmark"></i> Thành công!';
+                notification.style.background = "rgba(0, 255, 0, 0.9)"; // Màu xanh lá
+                element.classList.toggle("active");
 
-            setTimeout(() => {
-                notification.classList.remove("show");
-            }, 3000);
+                // Ẩn thông báo sau 3s
+                setTimeout(() => { notification.style.display = "none"; }, 2000);
+            }, 2000);
         }
